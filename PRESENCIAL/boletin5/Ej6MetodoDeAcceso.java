@@ -5,6 +5,7 @@ public class Ej6MetodoDeAcceso {
 	private final int DESCONECTADO = 0;
 	private final int CONECTADO = 1;
 	private final int BLOQUEADO = 2;
+	private final int REINICIO_INTENTOS = 5;
 	private int estadoAcceso = DESCONECTADO;
 	private String usuario;
 	private String password;
@@ -63,7 +64,7 @@ public class Ej6MetodoDeAcceso {
 		}else {
 			if (this.usuario.equals(user) && this.password.equals(pass)) {
 				this.estadoAcceso = CONECTADO;
-				this.numIntentos=5;
+				this.numIntentos=REINICIO_INTENTOS;
 				return true;
 			}else {
 				this.estadoAcceso = DESCONECTADO;
@@ -82,11 +83,26 @@ public class Ej6MetodoDeAcceso {
 	}
 
 	public boolean desbloquear(String PUK) {
-		return false;
+		if (this.estadoAcceso==BLOQUEADO) {
+			if (this.PUK.equals(PUK)) {
+				this.estadoAcceso=DESCONECTADO;
+				this.numIntentos=REINICIO_INTENTOS;	
+			}else {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean desconectar() {
-		return false;
+
+		if (this.estadoAcceso==CONECTADO) {
+			this.estadoAcceso=DESCONECTADO;
+			this.numIntentos=REINICIO_INTENTOS;
+			return true;
+		}else {
+			return false;
+		}
 
 	}
 	
