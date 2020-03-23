@@ -2,10 +2,6 @@ package boletin5;
 
 public class Ej8JuegoAdivinar {
 	
-	public static final String DOLAR = "DOLAR";
-	public static final String YEN = "YEN";
-	public static final String LIBRA = "LIBRA";
-	
 	private int numeroObjetivo;
 	private int numeroIntentos;
 	
